@@ -1,0 +1,8 @@
+- Create system that loads levels
+- Create a player that can move around
+	- player cant move past '#' wall characters
+- Create a monster that randomly roams around
+	- monster cant move past '#' wall characters
+	- monster randomly roams based off rand number
+	- monster will change to chasing a player withing 4 spaces of it
+- Allow player and monster contact to initiate a battle screen
