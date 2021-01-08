@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstdio>
+#include <conio.h>
 #include "Level.h"
 
 
@@ -40,8 +41,16 @@ void Level::load(std::string fileName, Player &player)
 			tile = _levelData[i][j];
 			switch (tile)
 			{
-			case '@':
+			case '@': //Player
 				player.setPos(j, i);
+				break;
+			case 'M': //Monster
+				_enemies.push_back(Enemy("Monster", tile, 1, 20, 1, 1, 10));
+				_enemies.back().setPos(j, i);
+				break;
+			case 'm': //Monster
+				_enemies.push_back(Enemy("monster", tile, 1, 10, 10, 10, 10));
+				_enemies.back().setPos(j, i);
 				break;
 			}
 		}
@@ -50,8 +59,7 @@ void Level::load(std::string fileName, Player &player)
 
 void Level::print()
 {
-	std::cout << std::string(100, '\n') << std::endl;
-
+	system("cls");
 	for (int i = 0; i < _levelData.size(); i++)
 	{
 		printf("%s\n", _levelData[i].c_str());
@@ -111,14 +119,81 @@ void Level::processPlayerMove(Player& player, int targetX, int targetY)
 	char moveTile = getTile(targetX, targetY);
 	switch (moveTile)
 	{
-	case '#':
-		printf("You ran into a wall!\n");
-		system("PAUSE");
-		break;
-	case '.':
+	case '.': //Open Space
 		player.setPos(targetX, targetY);
 		setTile(playerX, playerY, '.');
 		setTile(targetX, targetY, '@');
 		break;
+	case '#': //Wall
+		break;
+	case 'P': //Person
+		break;
+	case 'D': //Door
+		break;
+	case 'C': //Chest
+		break;
+	case '^': //Move map up
+		break;
+	case 'v': //Move map down
+		break;
+	case '<': //Move map left
+		break;
+	case '>': //Move map right
+		break;
+	default:
+		battleMonster(player, targetX, targetY);
+		break;
+	}
+}
+
+void Level::battleMonster(Player& player, int targetX, int targetY)
+{
+	int enemyX;
+	int enemyY;
+	int attackRoll;
+	int attackResult;
+	std::string enemyName;
+
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		_enemies[i].getPos(enemyX, enemyY);
+		enemyName == _enemies[i].getName();
+		if (targetX == enemyX && targetY == enemyY)
+		{
+			//Battle!
+
+			//Player turn
+			attackRoll = player.attack();
+			printf("\n%s attacked the %s with a chance of %d \n", player.getName().c_str(), enemyName.c_str(), attackRoll);
+			attackResult = _enemies[i].takeDamage(attackRoll);
+			printf("\n%s attacked the %s with a damage of %d \n", player.getName().c_str(), enemyName.c_str(), attackResult);
+			system("PAUSE");
+			if (attackResult != 0)
+			{
+				setTile(targetX, targetY, '.');
+				print();
+				printf("\nPlayer killed the monster!\n");
+				player.addExperience(attackResult);
+				system("PAUSE");
+
+				return;
+			}
+			//Monster Turn
+			attackRoll = _enemies[i].attack();
+			printf("\n%s attacked the %s with a chance of %d \n", enemyName.c_str(), player.getName().c_str(), attackRoll);
+			attackResult = player.takeDamage(attackRoll);
+			printf("\n%s attacked the %s with a damage of %d \n", enemyName.c_str(), player.getName().c_str(), attackResult);
+			system("PAUSE");
+			if (attackResult != 0)
+			{
+				setTile(playerX, playerY, 'x');
+				print();
+				printf("\nThe Monster killed the Player!\n");
+				exit(0);
+			}
+
+			return;
+		}
+
 	}
 }

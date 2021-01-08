@@ -6,7 +6,7 @@
 
 int main()
 {
-	GameSystem gameSystem("level1-1.txt");
+	GameSystem gameSystem("level1_0.txt");
 	gameSystem.playGame();
 
 };

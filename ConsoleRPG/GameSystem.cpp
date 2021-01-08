@@ -15,6 +15,7 @@ void GameSystem::playGame()
 	bool isDone = false;
 	while (isDone != true)
 	{
+		
 		_level.print();
 		playerMove();
 

@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "Player.h"
+#include "Enemy.h"
 
 class Level
 {
@@ -20,7 +21,9 @@ public:
 
 private:
 	std::vector <std::string> _levelData;
+	std::vector <Enemy> _enemies;
 	void processPlayerMove(Player &player, int targetX, int targetY);
+	void battleMonster(Player &player, int targetX, int targetY);
 
 };
 

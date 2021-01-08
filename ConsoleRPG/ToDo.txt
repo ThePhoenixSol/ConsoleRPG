@@ -1,8 +1,17 @@
-- Create system that loads levels
-- Create a player that can move around
-	- player cant move past '#' wall characters
+DONE - Create system that loads levels
+DONE - Create a player that can move around
+	DONE - player cant move past '#' wall characters
 - Create a monster that randomly roams around
 	- monster cant move past '#' wall characters
 	- monster randomly roams based off rand number
 	- monster will change to chasing a player withing 4 spaces of it
 - Allow player and monster contact to initiate a battle screen
+- Create a battle screen
+	- Allow this screen to have you select actions in a turn based system
+- Create and inventory system
+	- Be able to open chests on map and collect items
+	- Be able to sort through your items.
+
+- Create some sort of general ASCII theme for the graphics
+	- Have a menu system thats the same across the whole game
+	- Eventually color code the console?

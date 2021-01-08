@@ -30,6 +30,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h">
@@ -41,12 +44,27 @@
     <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ToDo.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="level1-1.txt">
+    <Text Include="level1_^1.txt">
+      <Filter>Resource Files\Levels</Filter>
+    </Text>
+    <Text Include="level1_0.txt">
+      <Filter>Resource Files\Levels</Filter>
+    </Text>
+    <Text Include="level1_-1.txt">
+      <Filter>Resource Files\Levels</Filter>
+    </Text>
+    <Text Include="level1_2.txt">
+      <Filter>Resource Files\Levels</Filter>
+    </Text>
+    <Text Include="level1_v1.txt">
       <Filter>Resource Files\Levels</Filter>
     </Text>
   </ItemGroup>
