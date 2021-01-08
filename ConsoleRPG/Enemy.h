@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Player.h"
 
 
 class Enemy
@@ -16,6 +17,8 @@ public:
 	//Getters
 	void getPos(int &x, int &y);
 	std::string getName() { return _name;}
+	char getMove(int playerX, int playerY);
+	char getTile() { return _tile; }
 
 private:
 	//Properties

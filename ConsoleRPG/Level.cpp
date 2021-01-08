@@ -100,6 +100,41 @@ void Level::movePlayer(char input, Player &player)
 	}
 }
 
+void Level::updateEnemies(Player& player)
+{
+	char aimove;
+	int playerX;
+	int playerY;
+	player.getPos(playerX, playerY);
+
+	int enemyX;
+	int enemyY;
+
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		_enemies[i].getPos(enemyX, enemyY);
+		aimove = _enemies[i].getMove(playerX, playerY);
+
+		switch (aimove)
+		{
+		case 'w': //Up
+			processEnemyMove(player, i, enemyX, enemyY - 1);
+			break;
+		case 'a': //Left
+			processEnemyMove(player, i, enemyX - 1, enemyY);
+			break;
+		case 's': //Down
+			processEnemyMove(player, i, enemyX, enemyY + 1);
+			break;
+		case 'd': //Right
+			processEnemyMove(player, i, enemyX + 1, enemyY);
+			break;
+		}
+	}
+
+
+}
+
 char Level::getTile(int x, int y)
 {
 	return _levelData[y][x];
@@ -146,13 +181,43 @@ void Level::processPlayerMove(Player& player, int targetX, int targetY)
 	}
 }
 
+void Level::processEnemyMove(Player& player, int enemyIndex, int targetX, int targetY)
+{
+	int playerX;
+	int playerY;
+	player.getPos(playerX, playerY);
+
+	int enemyX;
+	int enemyY;
+	_enemies[enemyIndex].getPos(enemyX, enemyY);
+
+	char moveTile = getTile(targetX, targetY);
+	switch (moveTile)
+	{
+	case '.': //Open Space
+		_enemies[enemyIndex].setPos(targetX, targetY);
+		setTile(enemyX, enemyY, '.');
+		setTile(targetX, targetY, _enemies[enemyIndex].getTile());
+		break;
+	case '@': //player
+		battleMonster(player, enemyX, enemyY);
+		break;
+	default:
+		break;
+	}
+}
+
 void Level::battleMonster(Player& player, int targetX, int targetY)
 {
 	int enemyX;
 	int enemyY;
+	int playerX;
+	int playerY;
 	int attackRoll;
 	int attackResult;
 	std::string enemyName;
+
+	player.getPos(playerX, playerY);
 
 	for (int i = 0; i < _enemies.size(); i++)
 	{
@@ -173,8 +238,12 @@ void Level::battleMonster(Player& player, int targetX, int targetY)
 				setTile(targetX, targetY, '.');
 				print();
 				printf("\nPlayer killed the monster!\n");
-				player.addExperience(attackResult);
+				//removes the enemies
+				_enemies[i] = _enemies.back();
+				_enemies.pop_back();
+				i--;
 				system("PAUSE");
+				player.addExperience(attackResult);
 
 				return;
 			}

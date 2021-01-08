@@ -53,3 +53,59 @@ void Enemy::getPos(int& x, int& y)
 	y = _y;
 }
 
+char Enemy::getMove(int playerX, int playerY)
+{
+	static std::default_random_engine randEngine(time(NULL));
+	std::uniform_int_distribution <int> moveRoll(0, 6);
+
+	int distance;
+	int dx = _x - playerX;
+	int dy = _y - playerY;
+	int adx = abs(dx);
+	int ady = abs(dy);
+	distance = adx + ady;
+	
+	if (distance <= 4)
+	{
+		//Moving along the X axis
+		if (adx > ady)
+		{
+			if (dx > 0)
+			{
+				return 'a';
+			}
+			else
+			{
+				return 'd';
+			}
+		}
+		else //Move along the Y axis
+		{
+			if (dy > 0)
+			{
+				return 'w';
+			}
+			else
+			{
+				return 's';
+			}
+		}
+	}
+
+	int randomMove = moveRoll(randEngine);
+	switch (randomMove)
+	{
+	case 0:
+		return 'w';
+	case 1:
+		return 'a';
+	case 2:
+		return 's';
+	case 3:
+		return 'd';
+	default:
+		return '.';
+	}
+
+}
+
