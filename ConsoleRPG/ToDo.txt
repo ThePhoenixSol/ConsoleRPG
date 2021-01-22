@@ -1,11 +1,11 @@
 DONE - Create system that loads levels
 DONE - Create a player that can move around
 	DONE - player cant move past '#' wall characters
-- Create a monster that randomly roams around
-	- monster cant move past '#' wall characters
-	- monster randomly roams based off rand number
-	- monster will change to chasing a player withing 4 spaces of it
-- Allow player and monster contact to initiate a battle screen
+DONE Create a monster that randomly roams around
+	DONE monster cant move past '#' wall characters
+	DONE monster randomly roams based off rand number
+	DONE monster will change to chasing a player withing 4 spaces of it
+DONE Allow player and monster contact to initiate a battle
 - Create a battle screen
 	- Allow this screen to have you select actions in a turn based system
 - Create and inventory system
@@ -15,3 +15,17 @@ DONE - Create a player that can move around
 - Create some sort of general ASCII theme for the graphics
 	- Have a menu system thats the same across the whole game
 	- Eventually color code the console?
+- Create a map navigation system
+	- Make a vector for player map coordinates.
+		- Use this vector to be able to tell what map the player is on, and then make contact with <, >, ^, v to + or - the coordinates therefore informing the system which map file it should load going forward(this will likely require the use of pointers.... fun)
+	- Make it to where you can navigate between map screens.
+- Create a save system
+	- Should be able to save, and then load back into the same char in the same map and position
+	- The save should save all stats and location info to some kind of file.
+	- You should be able to load from said save
+- Create character specing system
+	- Allow a player to spec ability points into certain stats as to have a more custom character.
+	
+	
+- Something something create a story
+	- must have multple rp options and dialogues between characters.
